@@ -30,16 +30,16 @@ if (isMobile) {
   document.getElementById("controls").style.display = "flex";
   document
     .getElementById("upButton")
-    .addEventListener("click", () => direction({ keyCode: 38 }));
+    .addEventListener("touchstart", () => direction({ keyCode: 38 }));
   document
     .getElementById("downButton")
-    .addEventListener("click", () => direction({ keyCode: 40 }));
+    .addEventListener("touchstart", () => direction({ keyCode: 40 }));
   document
     .getElementById("leftButton")
-    .addEventListener("click", () => direction({ keyCode: 37 }));
+    .addEventListener("touchstart", () => direction({ keyCode: 37 }));
   document
     .getElementById("rightButton")
-    .addEventListener("click", () => direction({ keyCode: 39 }));
+    .addEventListener("touchstart", () => direction({ keyCode: 39 }));
 }
 
 function direction(event) {
@@ -59,7 +59,7 @@ function resetGame() {
   score = 0;
   d = null;
   clearInterval(game);
-  game = setInterval(draw, 100);
+  game = setInterval(draw, 150); // Lower the speed
 }
 
 function toggleDarkMode() {
@@ -206,4 +206,4 @@ function draw() {
   ).innerText = `Score: ${score} | High Score: ${highScore}`;
 }
 
-let game = setInterval(draw, 100);
+let game = setInterval(draw, 150); // Lower the speed

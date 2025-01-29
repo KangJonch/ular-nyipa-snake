@@ -43,9 +43,9 @@ button {
 
 #controls button {
   margin: 5px;
-  width: 50px;
-  height: 50px;
-  font-size: 18px;
+  width: 70px;
+  height: 70px;
+  font-size: 24px;
 }
 
 @media (max-width: 600px) {
@@ -61,5 +61,7 @@ button {
   #resetButton,
   #darkModeToggle {
     margin-top: 10px;
+    padding: 5px 10px;
+    font-size: 14px;
   }
 }
