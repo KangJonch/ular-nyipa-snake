@@ -16,6 +16,7 @@ let score = 0;
 let highScore = getHighScore();
 let d;
 let isChangingColors = false;
+let lastDirection;
 
 let colors = getRandomColors();
 let bgColor = getRandomColor();
@@ -43,14 +44,18 @@ if (isMobile) {
 }
 
 function direction(event) {
-  if (event.keyCode == 37 && d != "RIGHT" && d != "LEFT") {
+  if (event.keyCode == 37 && d != "RIGHT" && lastDirection != "LEFT") {
     d = "LEFT";
-  } else if (event.keyCode == 38 && d != "DOWN" && d != "UP") {
+    lastDirection = "LEFT";
+  } else if (event.keyCode == 38 && d != "DOWN" && lastDirection != "UP") {
     d = "UP";
-  } else if (event.keyCode == 39 && d != "LEFT" && d != "RIGHT") {
+    lastDirection = "UP";
+  } else if (event.keyCode == 39 && d != "LEFT" && lastDirection != "RIGHT") {
     d = "RIGHT";
-  } else if (event.keyCode == 40 && d != "UP" && d != "DOWN") {
+    lastDirection = "RIGHT";
+  } else if (event.keyCode == 40 && d != "UP" && lastDirection != "DOWN") {
     d = "DOWN";
+    lastDirection = "DOWN";
   }
 }
 
@@ -58,6 +63,7 @@ function resetGame() {
   snake = [{ x: 9 * box, y: 10 * box }];
   score = 0;
   d = null;
+  lastDirection = null;
   clearInterval(game);
   game = setInterval(draw, 150); // Lower the speed
 }
