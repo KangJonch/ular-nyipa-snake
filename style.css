@@ -65,3 +65,23 @@ button {
     font-size: 14px;
   }
 }
+
+#epilepsyWarning {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: white;
+  border: 2px solid black;
+  padding: 20px;
+  z-index: 1000;
+  text-align: center;
+  display: none;
+}
+
+#epilepsyWarning button {
+  margin-top: 20px;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+}

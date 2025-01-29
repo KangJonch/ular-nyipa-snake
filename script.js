@@ -212,4 +212,17 @@ function draw() {
   ).innerText = `Score: ${score} | High Score: ${highScore}`;
 }
 
+function showEpilepsyWarning() {
+  const warning = document.getElementById("epilepsyWarning");
+  if (!localStorage.getItem("epilepsyWarningShown")) {
+    warning.style.display = "block";
+    document.getElementById("acceptWarning").addEventListener("click", () => {
+      warning.style.display = "none";
+      localStorage.setItem("epilepsyWarningShown", "true");
+    });
+  }
+}
+
+showEpilepsyWarning();
+
 let game = setInterval(draw, 150); // Lower the speed
