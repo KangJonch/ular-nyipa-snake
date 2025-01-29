@@ -16,7 +16,7 @@ let score = 0;
 let highScore = getHighScore();
 let d;
 let isChangingColors = false;
-let lastDirection;
+let directionQueue = [];
 
 let colors = getRandomColors();
 let bgColor = getRandomColor();
@@ -44,18 +44,35 @@ if (isMobile) {
 }
 
 function direction(event) {
-  if (event.keyCode == 37 && d != "RIGHT" && lastDirection != "LEFT") {
-    d = "LEFT";
-    lastDirection = "LEFT";
-  } else if (event.keyCode == 38 && d != "DOWN" && lastDirection != "UP") {
-    d = "UP";
-    lastDirection = "UP";
-  } else if (event.keyCode == 39 && d != "LEFT" && lastDirection != "RIGHT") {
-    d = "RIGHT";
-    lastDirection = "RIGHT";
-  } else if (event.keyCode == 40 && d != "UP" && lastDirection != "DOWN") {
-    d = "DOWN";
-    lastDirection = "DOWN";
+  const newDirection = event.keyCode;
+  const lastDirection = directionQueue.length
+    ? directionQueue[directionQueue.length - 1]
+    : d;
+
+  if (
+    newDirection == 37 &&
+    lastDirection != "RIGHT" &&
+    lastDirection != "LEFT"
+  ) {
+    directionQueue.push("LEFT");
+  } else if (
+    newDirection == 38 &&
+    lastDirection != "DOWN" &&
+    lastDirection != "UP"
+  ) {
+    directionQueue.push("UP");
+  } else if (
+    newDirection == 39 &&
+    lastDirection != "LEFT" &&
+    lastDirection != "RIGHT"
+  ) {
+    directionQueue.push("RIGHT");
+  } else if (
+    newDirection == 40 &&
+    lastDirection != "UP" &&
+    lastDirection != "DOWN"
+  ) {
+    directionQueue.push("DOWN");
   }
 }
 
@@ -63,7 +80,7 @@ function resetGame() {
   snake = [{ x: 9 * box, y: 10 * box }];
   score = 0;
   d = null;
-  lastDirection = null;
+  directionQueue = [];
   clearInterval(game);
   game = setInterval(draw, 150); // Lower the speed
 }
@@ -165,6 +182,10 @@ function draw() {
 
   let snakeX = snake[0].x;
   let snakeY = snake[0].y;
+
+  if (directionQueue.length) {
+    d = directionQueue.shift();
+  }
 
   if (d == "LEFT") snakeX -= box;
   if (d == "UP") snakeY -= box;
