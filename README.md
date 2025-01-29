@@ -16,3 +16,22 @@ Welcome to the Snake Game! This is a modern twist on the classic snake game, bui
 - **Mobile Controls**: On-screen arrow buttons for easy control on mobile devices.
 - **Snake Eyes**: The snake has cute little eyes on its head.
 - **Epilepsy Warning**: Be aware of the rapidly changing colors.
+- **Difficulty Toggle**: Increase or decrease the game speed to adjust the difficulty.
+
+## Demo
+
+Check out the live demo of the game [here](https://kangjonch.github.io/ular-nyipa-snake/).
+
+## Installation
+
+To run the game locally, follow these steps:
+
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/KangJonch/ular-nyipa-snake.git
+   ```
+2. Navigate to the project directory:
+   ```bash
+   cd snake-game
+   ```
+3. Open the `index.html` file in your browser to start playing the game.
