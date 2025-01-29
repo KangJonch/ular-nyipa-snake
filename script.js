@@ -17,6 +17,8 @@ let highScore = getHighScore();
 let d;
 let isChangingColors = false;
 let directionQueue = [];
+let gameSpeed = 150;
+let game;
 
 let colors = getRandomColors();
 let bgColor = getRandomColor();
@@ -26,6 +28,9 @@ document.getElementById("resetButton").addEventListener("click", resetGame);
 document
   .getElementById("darkModeToggle")
   .addEventListener("click", toggleDarkMode);
+document
+  .getElementById("difficultyToggle")
+  .addEventListener("click", toggleDifficulty);
 
 if (isMobile) {
   document.getElementById("controls").style.display = "flex";
@@ -82,11 +87,19 @@ function resetGame() {
   d = null;
   directionQueue = [];
   clearInterval(game);
-  game = setInterval(draw, 150); // Lower the speed
+  game = setInterval(draw, gameSpeed);
 }
 
 function toggleDarkMode() {
   document.body.classList.toggle("dark-mode");
+}
+
+function toggleDifficulty() {
+  gameSpeed = gameSpeed === 150 ? 100 : 150;
+  clearInterval(game);
+  game = setInterval(draw, gameSpeed);
+  document.getElementById("difficultyToggle").innerText =
+    gameSpeed === 150 ? "Increase Difficulty" : "Decrease Difficulty";
 }
 
 function collision(newHead, snake) {
@@ -246,4 +259,4 @@ function showEpilepsyWarning() {
 
 showEpilepsyWarning();
 
-let game = setInterval(draw, 150); // Lower the speed
+game = setInterval(draw, gameSpeed);
