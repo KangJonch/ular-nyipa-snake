@@ -35,3 +35,7 @@ To run the game locally, follow these steps:
    cd snake-game
    ```
 3. Open the `index.html` file in your browser to start playing the game.
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
