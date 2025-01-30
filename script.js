@@ -1,5 +1,5 @@
-const canvas = document.getElementById("gameCanvas");
-const ctx = canvas.getContext("2d");
+const canvas = document.getElementById('gameCanvas');
+const ctx = canvas.getContext('2d');
 
 const box = 20;
 const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
@@ -23,29 +23,29 @@ let game;
 let colors = getRandomColors();
 let bgColor = getRandomColor();
 
-document.addEventListener("keydown", direction);
-document.getElementById("resetButton").addEventListener("click", resetGame);
+document.addEventListener('keydown', direction);
+document.getElementById('resetButton').addEventListener('click', resetGame);
 document
-  .getElementById("darkModeToggle")
-  .addEventListener("click", toggleDarkMode);
+  .getElementById('darkModeToggle')
+  .addEventListener('click', toggleDarkMode);
 document
-  .getElementById("difficultyToggle")
-  .addEventListener("click", toggleDifficulty);
+  .getElementById('difficultyToggle')
+  .addEventListener('click', toggleDifficulty);
 
 if (isMobile) {
-  document.getElementById("controls").style.display = "flex";
+  document.getElementById('controls').style.display = 'flex';
   document
-    .getElementById("upButton")
-    .addEventListener("touchstart", () => direction({ keyCode: 38 }));
+    .getElementById('upButton')
+    .addEventListener('touchstart', () => direction({ keyCode: 38 }));
   document
-    .getElementById("downButton")
-    .addEventListener("touchstart", () => direction({ keyCode: 40 }));
+    .getElementById('downButton')
+    .addEventListener('touchstart', () => direction({ keyCode: 40 }));
   document
-    .getElementById("leftButton")
-    .addEventListener("touchstart", () => direction({ keyCode: 37 }));
+    .getElementById('leftButton')
+    .addEventListener('touchstart', () => direction({ keyCode: 37 }));
   document
-    .getElementById("rightButton")
-    .addEventListener("touchstart", () => direction({ keyCode: 39 }));
+    .getElementById('rightButton')
+    .addEventListener('touchstart', () => direction({ keyCode: 39 }));
 }
 
 function direction(event) {
@@ -56,28 +56,28 @@ function direction(event) {
 
   if (
     newDirection == 37 &&
-    lastDirection != "RIGHT" &&
-    lastDirection != "LEFT"
+    lastDirection != 'RIGHT' &&
+    lastDirection != 'LEFT'
   ) {
-    directionQueue.push("LEFT");
+    directionQueue.push('LEFT');
   } else if (
     newDirection == 38 &&
-    lastDirection != "DOWN" &&
-    lastDirection != "UP"
+    lastDirection != 'DOWN' &&
+    lastDirection != 'UP'
   ) {
-    directionQueue.push("UP");
+    directionQueue.push('UP');
   } else if (
     newDirection == 39 &&
-    lastDirection != "LEFT" &&
-    lastDirection != "RIGHT"
+    lastDirection != 'LEFT' &&
+    lastDirection != 'RIGHT'
   ) {
-    directionQueue.push("RIGHT");
+    directionQueue.push('RIGHT');
   } else if (
     newDirection == 40 &&
-    lastDirection != "UP" &&
-    lastDirection != "DOWN"
+    lastDirection != 'UP' &&
+    lastDirection != 'DOWN'
   ) {
-    directionQueue.push("DOWN");
+    directionQueue.push('DOWN');
   }
 }
 
@@ -91,15 +91,15 @@ function resetGame() {
 }
 
 function toggleDarkMode() {
-  document.body.classList.toggle("dark-mode");
+  document.body.classList.toggle('dark-mode');
 }
 
 function toggleDifficulty() {
   gameSpeed = gameSpeed === 150 ? 100 : 150;
   clearInterval(game);
   game = setInterval(draw, gameSpeed);
-  document.getElementById("difficultyToggle").innerText =
-    gameSpeed === 150 ? "Increase Difficulty" : "Decrease Difficulty";
+  document.getElementById('difficultyToggle').innerText =
+    gameSpeed === 150 ? 'Increase Difficulty' : 'Decrease Difficulty';
 }
 
 function collision(newHead, snake) {
@@ -137,11 +137,11 @@ function getRandomFoodPosition() {
 }
 
 function getHighScore() {
-  return localStorage.getItem("highScore") || 0;
+  return localStorage.getItem('highScore') || 0;
 }
 
 function setHighScore(score) {
-  localStorage.setItem("highScore", score);
+  localStorage.setItem('highScore', score);
 }
 
 function changeColorsRapidly() {
@@ -163,15 +163,15 @@ function draw() {
   ctx.fillRect(0, 0, canvas.width, canvas.height);
 
   for (let i = 0; i < snake.length; i++) {
-    ctx.fillStyle = i == 0 ? colors[0] : "white";
-    ctx.strokeStyle = "red";
+    ctx.fillStyle = i == 0 ? colors[0] : 'white';
+    ctx.strokeStyle = 'red';
     ctx.fillRect(snake[i].x, snake[i].y, box, box);
     ctx.strokeRect(snake[i].x, snake[i].y, box, box);
   }
 
   // Draw eyes on the head of the snake
   if (snake.length > 0) {
-    ctx.fillStyle = "black";
+    ctx.fillStyle = 'black';
     ctx.beginPath();
     ctx.arc(
       snake[0].x + box / 4,
@@ -200,10 +200,10 @@ function draw() {
     d = directionQueue.shift();
   }
 
-  if (d == "LEFT") snakeX -= box;
-  if (d == "UP") snakeY -= box;
-  if (d == "RIGHT") snakeX += box;
-  if (d == "DOWN") snakeY += box;
+  if (d == 'LEFT') snakeX -= box;
+  if (d == 'UP') snakeY -= box;
+  if (d == 'RIGHT') snakeX += box;
+  if (d == 'DOWN') snakeY += box;
 
   if (snakeX == food.x && snakeY == food.y) {
     score++;
@@ -242,17 +242,17 @@ function draw() {
   snake.unshift(newHead);
 
   document.getElementById(
-    "score"
+    'score'
   ).innerText = `Score: ${score} | High Score: ${highScore}`;
 }
 
 function showEpilepsyWarning() {
-  const warning = document.getElementById("epilepsyWarning");
-  if (!localStorage.getItem("epilepsyWarningShown")) {
-    warning.style.display = "block";
-    document.getElementById("acceptWarning").addEventListener("click", () => {
-      warning.style.display = "none";
-      localStorage.setItem("epilepsyWarningShown", "true");
+  const warning = document.getElementById('epilepsyWarning');
+  if (!localStorage.getItem('epilepsyWarningShown')) {
+    warning.style.display = 'block';
+    document.getElementById('acceptWarning').addEventListener('click', () => {
+      warning.style.display = 'none';
+      localStorage.setItem('epilepsyWarningShown', 'true');
     });
   }
 }
